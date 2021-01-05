@@ -1,6 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Row, Col, Image, Button, ListGroup, Card } from 'react-bootstrap'
+import {
+  Row,
+  Col,
+  Image,
+  Button,
+  ListGroup,
+  Card,
+  ListGroupItem,
+} from 'react-bootstrap'
 import Rating from '../Components/Rating'
 import products from '../products'
 const ProductScreen = ({ match }) => {
@@ -16,22 +24,50 @@ const ProductScreen = ({ match }) => {
         </Col>
         <Col md={3}>
           <ListGroup variant='flush'>
-            <ListGroup.Items>
+            <ListGroup.Item>
               <h3>{product.name}</h3>
-            </ListGroup.Items>
-            <ListGroup.Items>
+            </ListGroup.Item>
+            <ListGroup.Item>
               <Rating
                 value={product.rating}
                 text={`${product.numReviews} Reviews`}
               />
-            </ListGroup.Items>
-            <ListGroup.Items>price: {product.price}</ListGroup.Items>
-            <ListGroup.Items>
-              description: {product.description}
-            </ListGroup.Items>
+            </ListGroup.Item>
+            <ListGroup.Item>price: {product.price}</ListGroup.Item>
+            <ListGroup.Item>description: {product.description}</ListGroup.Item>
           </ListGroup>
         </Col>
-        <Col md={3}></Col>
+        <Col md={3}>
+          <Card>
+            <ListGroup variant='flush'>
+              <ListGroup.Item>
+                <Row>
+                  <Col>price:</Col>
+                  <Col>
+                    <strong>${product.price}</strong>
+                  </Col>
+                </Row>
+              </ListGroup.Item>
+              <ListGroup.Item>
+                <Row>
+                  <Col>Status:</Col>
+                  <Col>
+                    {product.countInStock > 0 ? 'InStock' : 'Out of Stock'}
+                  </Col>
+                </Row>
+              </ListGroup.Item>
+              <ListGroupItem>
+                <Button
+                  className='btn-block'
+                  type='button'
+                  disabled={product.countInStock === 0}
+                >
+                  Add To Cart
+                </Button>
+              </ListGroupItem>
+            </ListGroup>
+          </Card>
+        </Col>
       </Row>
     </>
   )
