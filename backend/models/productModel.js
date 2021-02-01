@@ -4,16 +4,14 @@ const reviewsSchema = mongoose.Schema(
   {
     name: {
       type: String,
-      requried: true,
     },
     rating: {
       type: Number,
-      requried: true,
+
       default: 0,
     },
     comment: {
       type: String,
-      requried: true,
     },
   },
   {
@@ -51,7 +49,7 @@ const productSchema = mongoose.Schema(
     reviews: [reviewsSchema],
     rating: {
       type: Number,
-      required: true,
+
       default: 0,
     },
     numReviews: {
