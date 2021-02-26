@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Row, Col, ListGroup, Image, Form, Button, Card } from 'react-bootstrap'
 import Message from '../Components/Message'
-import { addToCart } from '../actions/CartActions'
+import { addToCart, removeFromCart } from '../actions/CartActions'
 
 const CartScreen = ({ match, location, history }) => {
   const productId = match.params.id
@@ -23,7 +23,7 @@ const CartScreen = ({ match, location, history }) => {
   }, [dispatch, productId, qty])
 
   const removeFromCarthandler = (id) => {
-    console.log('remove')
+    dispatch(removeFromCart(id))
   }
   const checkoutHandler = () => {
     history.push('/login?redirect=shipping')
@@ -52,7 +52,7 @@ const CartScreen = ({ match, location, history }) => {
                   <Col md={2}>
                     <Form.Control
                       as='select'
-                      value={qty}
+                      value={item.qty}
                       onChange={(e) =>
                         dispatch(
                           addToCart(item.product, Number(e.target.value))
@@ -72,7 +72,7 @@ const CartScreen = ({ match, location, history }) => {
                       variant='light'
                       onClick={() => removeFromCarthandler(item.product)}
                     >
-                      <i classname='fa fa-trash'></i>
+                      <i className='fa fa-trash'></i>
                     </Button>
                   </Col>
                 </Row>
